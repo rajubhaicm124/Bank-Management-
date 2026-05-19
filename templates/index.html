@@ -1,0 +1,170 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="glass-card" style="padding: 4rem 3rem; text-align: center; margin-bottom: 3rem;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png"
+         alt="Smart Banking"
+         style="width:120px; margin-bottom: 1.5rem;">
+
+    <h1 style="font-size: 3.5rem; margin-bottom: 1rem; color: var(--text-primary);">
+        Smart Bank Management System
+    </h1>
+
+    <p style="color: var(--text-secondary); font-size: 1.2rem; max-width: 750px; margin: 0 auto 2rem; line-height: 1.8;">
+        Manage your finances with a secure and intelligent banking platform.
+        Easily perform deposits, withdrawals, monitor transactions, view account statements,
+        and explore smart investment opportunities — all in one modern digital banking experience.
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-top:2rem;">
+        <a href="{{ url_for('register') }}" class="btn-primary" style="font-size:1rem; padding:1rem 2rem;">
+            Create Account
+        </a>
+
+        <a href="{{ url_for('login') }}" class="btn-primary" style="background:#1e293b; font-size:1rem; padding:1rem 2rem;">
+            Login Securely
+        </a>
+    </div>
+</div>
+
+<!-- Deposit -->
+     <div class="section-title">
+
+        <h2>Operations</h2>
+
+    </div>
+<!-- Features Section -->
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:2rem; margin-bottom:3rem;">
+  
+    <div class="glass-card" style="padding:2rem; text-align:center;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png"
+             alt="Deposit"
+             style="width:80px; margin-bottom:1rem;">
+
+        <h2 style="margin-bottom:1rem; color: var(--text-primary);">Easy Deposits</h2>
+
+        <p style="color:var(--text-secondary); line-height:1.7;">
+            Deposit funds securely into your account with real-time balance updates and transaction tracking.
+        </p>
+    </div>
+
+    <!-- Withdrawal -->
+    <div class="glass-card" style="padding:2rem; text-align:center;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png"
+             alt="Withdraw"
+             style="width:80px; margin-bottom:1rem;">
+
+        <h2 style="margin-bottom:1rem; color: var(--text-primary);">Quick Withdrawals</h2>
+
+        <p style="color:var(--text-secondary); line-height:1.7;">
+            Withdraw money instantly while maintaining advanced security and transparent transaction records.
+        </p>
+    </div>
+
+    <!-- Statements -->
+    <div class="glass-card" style="padding:2rem; text-align:center;">
+        <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+             alt="Statements"
+             style="width:80px; margin-bottom:1rem;">
+
+        <h2 style="margin-bottom:1rem; color: var(--text-primary);">Account Statements</h2>
+
+        <p style="color:var(--text-secondary); line-height:1.7;">
+            Access complete transaction history and downloadable account statements anytime.
+        </p>
+    </div> 
+
+</div>
+
+ <!-- HOW IT WORKS -->
+
+    <div class="section-title">
+
+        <h2>How It Works</h2>
+
+        <p>Simple and secure banking in a few easy steps</p>
+
+    </div>
+
+    <div class="steps">
+
+        <div class="step-card">
+
+            <div class="step-number">1</div>
+
+            <h3>Create Account</h3>
+
+            <p>
+                Register your account securely using the online banking portal.
+            </p>
+
+        </div>
+
+        <div class="step-card">
+
+            <div class="step-number">2</div>
+
+            <h3>Login Securely</h3>
+
+            <p>
+                Access your dashboard using encrypted authentication protection.
+            </p>
+
+        </div>
+
+        <div class="step-card">
+
+            <div class="step-number">3</div>
+
+            <h3>Manage Banking</h3>
+
+            <p>
+                Deposit, withdraw, view statements, and manage investments easily.
+            </p>
+
+        </div>
+
+        <div class="step-card">
+
+            <div class="step-number">4</div>
+
+            <h3>Track Transactions</h3>
+
+            <p>
+                Monitor your banking activities with real-time transaction updates.
+            </p>
+
+        </div>
+
+    </div>
+
+<!-- Security Section -->
+<div class="glass-card" style="padding:3rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+
+    <div style="flex:1; min-width:280px;">
+        <h2 style="margin-bottom:1rem; color: var(--text-primary);">Advanced Banking Security</h2>
+
+        <p style="color:var(--text-secondary); line-height:1.8;">
+            Our banking management system uses encrypted authentication and secure transaction processing
+            to ensure your financial data remains protected at all times.
+        </p>
+
+        <ul style="margin-top:1rem; color:var(--text-secondary); line-height:2;">
+            <li>✔ Secure Login Authentication</li>
+            <li>✔ Real-Time Transaction Monitoring</li>
+            <li>✔ Instant Balance & Statement Updates</li>
+        </ul>
+    </div>
+
+    <div style="flex:1; text-align:center; min-width:280px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png"
+             alt="Bank Security"
+             style="width:250px; max-width:100%;">
+    </div>
+</div>
+
+
+{% endblock %}
+```

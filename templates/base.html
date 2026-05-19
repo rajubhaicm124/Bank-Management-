@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Online Bank Management System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+
+:root{
+    --bg-primary:#071120;
+    --bg-secondary:#0f172a;
+    --glass:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.1);
+
+    --text-main:#ffffff;
+    --text-muted:#cbd5e1;
+
+    --gradient-main:linear-gradient(135deg,#2563eb,#7c3aed,#06b6d4);
+    --gradient-card:linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03));
+
+    --shadow:0 8px 40px rgba(0,0,0,0.3);
+}
+
+/* LIGHT MODE */
+
+body.light-mode{
+    background:linear-gradient(135deg,#e2e8f0,#f8fafc,#dbeafe);
+    color:#0f172a;
+}
+
+body.light-mode nav,
+body.light-mode .hero,
+body.light-mode .feature-card,
+body.light-mode .step-card,
+body.light-mode .security-section,
+body.light-mode footer{
+    background:rgba(255,255,255,0.75);
+    border:1px solid rgba(0,0,0,0.08);
+    backdrop-filter:blur(15px);
+}
+
+body.light-mode p,
+body.light-mode li,
+body.light-mode .section-title p,
+body.light-mode .footer-links a{
+    color:#334155;
+}
+
+body.light-mode .nav-links a{
+    color:#0f172a;
+}
+
+body.light-mode .footer-bottom{
+    color:#334155;
+}
+
+body.light-mode .bg-circle{
+    opacity:0.12;
+}
+
+/* TOGGLE BUTTON */
+
+.theme-toggle{
+    width:80px;
+    height: 50px;
+    background:rgba(255,255,255,0.12);
+    border-radius:70px;
+    position:relative;
+    cursor:pointer;
+    text-align: center;
+    border:1px solid rgba(255,255,255,0.15);
+    transition:0.4s;
+}
+
+.toggle-circle{
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    top:3px;
+    left:4px;
+    transition:0.4s;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+
+body.light-mode .toggle-circle{
+    transform:translateX(30px);
+    background:#2563eb;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#020617,#071120,#0f172a);
+    color:var(--text-main);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* BEAUTIFUL BACKGROUND */
+
+.bg-circle{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:0.25;
+    z-index:-1;
+}
+
+.circle1{
+    width:450px;
+    height:450px;
+    background:#2563eb;
+    top:-120px;
+    left:-120px;
+}
+
+.circle2{
+    width:500px;
+    height:500px;
+    background:#7c3aed;
+    bottom:-180px;
+    right:-150px;
+}
+
+.circle3{
+    width:350px;
+    height:350px;
+    background:#06b6d4;
+    top:40%;
+    left:40%;
+}
+
+/* NAVBAR */
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.3rem 6%;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+    font-size:1.5rem;
+    font-weight:700;
+}
+
+.logo img{
+    width:50px;
+    height:50px;
+}
+
+.logo-text{
+    background:var(--gradient-main);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:1.5rem;
+    list-style:none;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#38bdf8;
+}
+
+.btn-primary{
+    background:var(--gradient-main);
+    padding:0.7rem 1.5rem;
+    border-radius:50px;
+    box-shadow:0 5px 20px rgba(37,99,235,0.4);
+}
+
+/* MAIN CONTAINER */
+
+.main-container{
+    width:90%;
+    max-width:1300px;
+    margin:3rem auto;
+}
+
+/* HERO SECTION */
+
+.hero{
+    text-align:center;
+    padding:5rem 2rem;
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    border:1px solid var(--border);
+    border-radius:30px;
+    box-shadow:var(--shadow);
+    margin-bottom:3rem;
+}
+
+.hero img{
+    width:140px;
+    margin-bottom:1.5rem;
+}
+
+.hero h1{
+    font-size:4rem;
+    margin-bottom:1rem;
+    background:var(--gradient-main);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    color:var(--text-muted);
+    max-width:850px;
+    margin:auto;
+    line-height:1.9;
+    font-size:1.1rem;
+}
+
+.hero-buttons{
+    margin-top:2rem;
+    display:flex;
+    justify-content:center;
+    gap:1rem;
+    flex-wrap:wrap;
+}
+
+/* FEATURE CARDS */
+
+.section-title{
+    text-align:center;
+    margin-bottom:3rem;
+}
+
+.section-title h2{
+    font-size:2.5rem;
+    margin-bottom:1rem;
+}
+
+.section-title p{
+    color:var(--text-muted);
+}
+
+.features-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:2rem;
+    margin-bottom:4rem;
+}
+
+.feature-card{
+    background:var(--gradient-card);
+    border:1px solid var(--border);
+    backdrop-filter:blur(12px);
+    padding:2rem;
+    border-radius:25px;
+    text-align:center;
+    transition:0.4s;
+    box-shadow:var(--shadow);
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+}
+
+.feature-card img{
+    width:90px;
+    margin-bottom:1.2rem;
+}
+
+.feature-card h3{
+    margin-bottom:1rem;
+}
+
+.feature-card p{
+    color:var(--text-muted);
+    line-height:1.7;
+}
+
+/* HOW IT WORKS */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:2rem;
+    margin-bottom:4rem;
+}
+
+.step-card{
+    background:var(--glass);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:2rem;
+    text-align:center;
+    backdrop-filter:blur(12px);
+}
+
+.step-number{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:var(--gradient-main);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto auto 1rem auto;
+    font-size:1.5rem;
+    font-weight:700;
+}
+
+/* SECURITY SECTION */
+
+.security-section{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:3rem;
+    align-items:center;
+
+    background:var(--glass);
+    padding:3rem;
+    border-radius:30px;
+    border:1px solid var(--border);
+    backdrop-filter:blur(15px);
+    margin-bottom:4rem;
+}
+
+.security-section img{
+    width:100%;
+    max-width:350px;
+    margin:auto;
+}
+
+.security-section ul{
+    margin-top:1.5rem;
+    line-height:2;
+    color:var(--text-muted);
+}
+
+/* FOOTER */
+
+footer{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    border-top:1px solid var(--border);
+    padding:4rem 5% 2rem;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:3rem;
+    max-width:1300px;
+    margin:auto;
+}
+
+.footer-links{
+    list-style:none;
+}
+
+.footer-links li{
+    margin-bottom:1rem;
+}
+
+.footer-links a{
+    text-decoration:none;
+    color:var(--text-muted);
+}
+
+.footer-links a:hover{
+    color:white;
+}
+
+.footer-bottom{
+    text-align:center;
+    margin-top:3rem;
+    color:var(--text-muted);
+    border-top:1px solid var(--border);
+    padding-top:1.5rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2.5rem;
+    }
+
+    .nav-links{
+        display:none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-circle circle1"></div>
+<div class="bg-circle circle2"></div>
+<div class="bg-circle circle3"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+
+        <img src="https://clipart-library.com/new_gallery/25-255288_logo-circle.png">
+
+        <div class="logo-text">
+            Smart Online Bank
+        </div>
+
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+
+        {% if session.get('logged_in') %}
+
+        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+
+        <li><a href="{{ url_for('deposit') }}">Deposit</a></li>
+
+        <li><a href="{{ url_for('withdraw') }}">Withdraw</a></li>
+
+        <li><a href="{{ url_for('statements') }}">Statements</a></li>
+
+        <!-- USER PROFILE LINK -->
+        <li>
+          <a href="{{ url_for('userprofile') }}">
+            Profile
+          </a>
+        </li>
+
+        <li><a href="{{ url_for('logout') }}" class="btn-primary">Logout</a></li>
+
+        {% else %}
+
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+
+        <li><a href="{{ url_for('register') }}" class="btn-primary">Open Account</a></li>
+
+        {% endif %}
+
+        <!-- DARK LIGHT TOGGLE -->
+
+        <div class="theme-toggle" id="themeToggle">
+
+            <div class="toggle-circle"></div>
+
+        </div>
+
+    </ul>
+
+</nav>
+
+<!-- MAIN CONTENT -->
+
+<div class="main-container">
+
+    {% block content %}
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png">
+
+        <h1>Smart Online Bank Management System</h1>
+
+        <p style="color: var(--text-primary);">
+            A secure and modern digital banking platform that allows users to
+            deposit money, withdraw funds, manage investments, and access
+            account statements anytime with advanced security protection.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('register') }}" class="btn-primary">
+                Create Account
+            </a>
+
+            <a href="{{ url_for('login') }}" class="btn-primary">
+                Secure Login
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- FEATURES -->
+
+    <div class="section-title">
+
+        <h2>Banking Features</h2>
+
+        <p>Explore our intelligent banking services</p>
+
+    </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+
+            <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png">
+
+            <h3>Deposit Money</h3>
+
+            <p>
+                Deposit money securely with instant balance updates and transaction tracking.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+            <h3>Withdraw Funds</h3>
+
+            <p>
+                Withdraw money safely using protected banking authentication systems.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png">
+
+            <h3>View Statements</h3>
+
+            <p>
+                Access passbook records and complete transaction history anytime.
+            </p>
+
+        </div>
+
+        
+
+    </div>
+
+    <!-- SECURITY -->
+
+    <div class="security-section">
+
+        <div>
+
+            <h2 style="font-size:2.5rem; margin-bottom:1rem;">
+                Advanced Banking Security
+            </h2>
+
+            <p style="color:var(--text-muted); line-height:1.8;">
+                Our banking system protects your data with secure authentication,
+                encrypted transactions, and intelligent monitoring systems.
+            </p>
+
+            <ul>
+                <li>✔ Secure Account Protection</li>
+                <li>✔ Encrypted Transactions</li>
+                <li>✔ Real-Time Balance Updates</li>
+                <li>✔ Investment Monitoring</li>
+                <li>✔ Protected Banking Dashboard</li>
+            </ul>
+
+        </div>
+
+        <div style="text-align:center;">
+
+            <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png">
+
+        </div>
+
+    </div>
+
+    {% endblock %}
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <div class="logo-text" style="font-size:1.8rem; font-weight:700;">
+                Smart Online Bank
+            </div>
+
+            <p style="margin-top:1rem; color:var(--text-primary); line-height:1.8;">
+                Future-ready digital banking system designed for secure
+                financial management.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3 style="margin-bottom:1.2rem;">Services</h3>
+
+            <ul class="footer-links">
+
+                <li><a href="#">Personal Banking</a></li>
+
+                <li><a href="#">Deposit Services</a></li>
+
+                <li><a href="#">Account Statements</a></li>
+
+            </ul>
+
+        </div>
+
+        <div>
+
+            <h3 style="margin-bottom:1.2rem;">Contact Us</h3>
+
+            <ul class="footer-links">
+
+                <li>📍 Andhra Pradesh, India</li>
+
+                <li>📞 +91 9876543210</li>
+
+                <li>✉️ support@smartbank.com</li>
+
+                <li>🕒 24/7 Banking Support</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © 2026 Smart Online Bank Management System | Secure Banking Platform
+
+    </div>
+
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<script>
+
+const themeToggle = document.getElementById("themeToggle");
+
+/* LOAD SAVED MODE */
+
+if(localStorage.getItem("theme") === "light"){
+    document.body.classList.add("light-mode");
+}
+
+/* TOGGLE MODE */
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("light-mode");
+
+    if(document.body.classList.contains("light-mode")){
+        localStorage.setItem("theme","light");
+    } else {
+        localStorage.setItem("theme","dark");
+    }
+
+});
+
+</script>
+
+</body>
+</html>

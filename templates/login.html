@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="glass-card" style="max-width: 500px; margin: 0 auto;">
+    <h2>Identity Access Sign In</h2>
+    <form method="POST">
+        <label>Account Email</label>
+        <input type="email" name="email" required placeholder="john@example.com">
+        <label>Password</label>
+        <input type="password" name="password" required placeholder="••••••••">
+        <button type="submit" class="btn-primary" style="width:100%;">Authorize Access</button>
+        <div style="text-align:center; margin-top:20px;">
+
+    <span style="color:#cbd5e1;">
+        Don't have an account?
+    </span>
+
+    <a href="{{ url_for('register') }}"
+       style="
+       color:#38bdf8;
+       text-decoration:none;
+       font-weight:600;
+       margin-left:5px;">
+       Register
+    </a>
+
+</div>
+    </form>
+</div>
+{% endblock %}

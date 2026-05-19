@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="glass-card" style="max-width: 500px; margin: 0 auto;">
+    <h2 style="color: var(--text-primary);">Secure Capital Withdrawal</h2>
+    <form method="POST">
+        <label style="color: var(--text-primary);">Withdraw Amount (₹)</label>
+        <input type="number" step="0.01" name="amount" min="1" required placeholder="0.00">
+        <label style="color: var(--text-primary);">Enter 4-Digit Secure PIN Verification</label>
+        <input type="password" name="pin" maxlength="4" pattern="\d{4}" required placeholder="••••">
+        <button type="submit" class="btn-primary" style="width: 100%;">Execute Safe Release</button>
+    </form>
+</div>
+{% endblock %}

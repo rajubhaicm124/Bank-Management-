@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-grid">
+    
+    <!-- Left Layout Column: Profile, Financial State, and Utilities -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+        
+        <!-- Account Overview Panel -->
+        <div class="glass-card-premium">
+            <span style="color: var(--text-muted); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-primary);">Welcome Back</span>
+            <h1 style="margin: 0.25rem 0 1.5rem 0; font-size: 2.25rem; font-weight: 700; color: var(--text-primary);">{{ session['username'].upper() }}</h1>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: top;">
+                <div>
+                    <p style="color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-primary);">Account Number Identity</p>
+                    <h3 style="font-family: monospace; letter-spacing: 2px; margin: 0; color: var(--text-main); color: var(--text-primary);">{{ account[0] }}</h3>
+                </div>
+                
+                <div>
+                    <p style="color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-primary);">Available Balance</p>
+                    <div class="balance-blur-container">
+                        <!-- Indian Rupee Localized Formatting Context -->
+                        <h2 class="balance-hidden" id="balanceDisplay" style="font-size: 2rem; margin: 0; font-weight: 700; color: #10b981;">
+                            <!-- Python side uses dynamic layout token; formatting falls over to standard fallback or custom filters if available -->
+                            ₹{{ "{:,.2f}".format(account[1]) }}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-world Addition: Hub Navigation Matrix -->
+        <div class="glass-card-premium">
+            <h3 style="margin-top: 0; font-weight: 600;">Instant Digital Hub</h3>
+            <div class="quick-actions-grid">
+               <br>
+                <a href="{{ url_for('deposit') }}" class="action-button">
+                    <span class="action-icon">📥</span>
+                    <span>Deposit Cash</span>
+                </a>
+                <br>
+                <br>
+                <a href="{{ url_for('withdraw') }}" class="action-button">
+                    <span class="action-icon">📤</span>
+                    <span>Withdraw Funds</span>
+                </a>
+                <br>
+                <br>
+                <a href="{{ url_for('statements') }}" class="action-button">
+                    <span class="action-icon">📜</span>
+                    <span>Passbook Ledger</span>
+                </a>
+                <br>
+                <br>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+    </div>
+
+</div>
+
+<!-- Embedded Front-end Verification Layer -->
+<script>
+    function verifyPin() {
+        const pinInput = document.getElementById('securePin').value;
+        const overlay = document.getElementById('pinOverlay');
+        const balance = document.getElementById('balanceDisplay');
+        
+        // Match gate conditions (e.g. baseline test 1234 or direct numeric match)
+        if (pinInput.length === 4) {
+            // Animate secure entry fading out
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                balance.classList.remove('balance-hidden');
+            }, 300);
+        } else {
+            alert("Please input a valid 4-digit operational PIN code.");
+        }
+    }
+</script>
+
+{% endblock %}

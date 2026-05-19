@@ -1,0 +1,364 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+
+:root{
+    --bg:#071120;
+    --glass:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.1);
+
+    --text:#ffffff;
+    --muted:#cbd5e1;
+
+    --gradient:linear-gradient(135deg,#2563eb,#7c3aed,#06b6d4);
+
+    --shadow:0 8px 40px rgba(0,0,0,0.3);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#020617,#071120,#0f172a);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* BACKGROUND */
+
+.bg-circle{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:0.25;
+    z-index:-1;
+}
+
+.circle1{
+    width:400px;
+    height:400px;
+    background:#2563eb;
+    top:-100px;
+    left:-100px;
+}
+
+.circle2{
+    width:450px;
+    height:450px;
+    background:#7c3aed;
+    bottom:-150px;
+    right:-150px;
+}
+
+/* CONTAINER */
+
+.profile-container{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+/* PROFILE CARD */
+
+.profile-card{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    border:1px solid var(--border);
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+/* TOP SECTION */
+
+.profile-top{
+    background:var(--gradient);
+    padding:40px;
+    text-align:center;
+    position:relative;
+}
+
+.profile-image{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    border:5px solid rgba(255,255,255,0.4);
+    object-fit:cover;
+    box-shadow:
+    0 0 20px rgba(255,255,255,0.5),
+    0 0 40px rgba(37,99,235,0.5);
+}
+
+.profile-name{
+    margin-top:20px;
+    font-size:2rem;
+    font-weight:700;
+}
+
+.profile-role{
+    margin-top:8px;
+    color:#e2e8f0;
+    font-size:1rem;
+}
+
+/* BODY */
+
+.profile-body{
+    padding:40px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+/* INFO CARD */
+
+.info-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:25px;
+}
+
+.info-card h3{
+    margin-bottom:20px;
+    font-size:1.3rem;
+    background:var(--gradient);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* DETAILS */
+
+.detail{
+    margin-bottom:18px;
+}
+
+.detail label{
+    display:block;
+    font-size:0.9rem;
+    color:var(--muted);
+    margin-bottom:6px;
+}
+
+.detail span{
+    font-size:1rem;
+    font-weight:500;
+}
+
+/* ACCOUNT BALANCE */
+
+.balance-card{
+    text-align:center;
+    padding:30px;
+}
+
+.balance-amount{
+    font-size:3rem;
+    font-weight:700;
+    margin-top:15px;
+    color:#38bdf8;
+}
+
+/* BUTTONS */
+
+.profile-buttons{
+    margin-top:25px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:12px 22px;
+    border:none;
+    border-radius:50px;
+    font-size:0.95rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    text-decoration:none;
+}
+
+.btn-primary{
+    background:var(--gradient);
+    color:white;
+    box-shadow:0 5px 20px rgba(37,99,235,0.4);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+}
+
+/* BACK BUTTON */
+
+.back-btn{
+    position:absolute;
+    top:150px;
+    left:60px;
+    text-decoration:none;
+    color:white;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    padding:12px 22px;
+    border-radius:50px;
+    backdrop-filter:blur(10px);
+    font-weight:600;
+    transition:0.3s;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+.back-btn:hover{
+    background:rgba(255,255,255,0.15);
+    transform:translateY(-2px);
+}
+
+.btn-outline{
+    border:1px solid rgba(255,255,255,0.2);
+    color:white;
+    background:transparent;
+}
+
+.btn-outline:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .profile-body{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .profile-name{
+        font-size:1.5rem;
+    }
+
+    .balance-amount{
+        font-size:2.2rem;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+
+<div class="bg-circle circle1"></div>
+<div class="bg-circle circle2"></div>
+<!-- BACK BUTTON -->
+
+<div style="margin-bottom:25px;">
+
+    <a href="{{ url_for('dashboard') }}" class="back-btn">
+        ← Back 
+    </a>
+
+</div>
+
+<!-- PROFILE CONTAINER -->
+
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <!-- TOP -->
+
+        <div class="profile-top">
+
+            <img 
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            class="profile-image">
+
+            <h1 class="profile-name">
+               {{ session['username'].upper() }}
+            </h1>
+
+            <p class="profile-role">
+                Premium Banking Customer
+            </p>
+
+        </div>
+
+        <!-- BODY -->
+
+        <div class="profile-body">
+
+            <!-- PERSONAL INFO -->
+
+            <div class="info-card">
+
+                <h3>Personal Information</h3>
+
+                <div class="detail">
+                    <label style="color: var(--text-primary);">Full Name</label>
+                    <span>{{ session['username'].upper() }}</span>
+                </div>
+
+                <div class="detail">
+                    <label style="color: var(--text-primary);">Email Address</label>
+                    <span>{{ session['username']}}@gmail.com</span>
+                </div>
+
+                <div class="detail">
+                    <label style="color: var(--text-primary);">Phone Number</label>
+                    <span>+91 9876543210</span>
+                </div>
+
+                <div class="detail">
+                    <label style="color: var(--text-primary);">Address</label>
+                    <span>Andhra Pradesh, India</span>
+                </div>
+
+            </div>
+
+            <!-- ACCOUNT INFO -->
+
+            <div class="info-card balance-card">
+
+                <h3>Bank Account Details</h3>
+
+                <div class="detail">
+                    <label style="color: var(--text-primary);">Account Number</label>
+                    <span>XXXX XXXX 4589</span>
+                </div>
+
+                <div class="detail">
+                    <label style="color: var(--text-primary);">Account Type</label>
+                    <span>Savings Account</span>
+                </div>
+
+                <div class="profile-buttons" style="justify-content:center;">
+
+                    <a href="{{ url_for('deposit') }}" class="btn btn-primary">
+                        Deposit
+                    </a>
+
+                    <a href="{{ url_for('withdraw') }}" class="btn btn-primary">
+                        Withdraw
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

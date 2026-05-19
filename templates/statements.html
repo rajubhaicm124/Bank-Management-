@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="glass-card">
+    <h2 style="color: var(--text-primary);">Secure Account Statements Auditor</h2>
+    {% if not transactions %}
+    <form method="POST" style="max-width: 400px; margin-top:1.5rem;">
+        <label style="color: var(--text-primary);">Verify Account Transaction PIN to View Audit Logs</label>
+        <input type="password" name="pin" maxlength="4" pattern="\d{4}" required placeholder="••••">
+        <button type="submit" class="btn-primary">Unlock Ledger</button>
+    </form>
+    {% else %}
+    <table style="width:100%; border-collapse:collapse; margin-top:2rem; text-align:left;">
+        <thead>
+            <tr style="border-bottom:2px solid var(--border-glass); color:var(--text-primary);">
+                <th style="padding:1rem;">Timestamp Index</th>
+                <th style="color: var(--text-primary);">Operation Type</th>
+                <th style="color: var(--text-primary);">Delta Volume Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in transactions %}
+            <tr style="border-bottom:1px solid var(--border-glass);">
+                <td style="padding:1rem; color: var(--text-primary);">{{ t[2] }}</td>
+                <td style="font-weight:600; color: {% if t[0]=='Deposit' %}var(--accent-green){% else %}red{% endif %};">{{ t[0] }}</td>
+                <td style="color: var(--text-primary);">₹{{ "{:,.2f}".format(t[1]) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}
